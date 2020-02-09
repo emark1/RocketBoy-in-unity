@@ -35,7 +35,7 @@ public class Rocket : MonoBehaviour
         if (Input.GetKey(KeyCode.Space)) {
             float thrustSpeed = verticalThrust * Time.deltaTime;
             rigidbody.AddRelativeForce(Vector3.up * verticalThrust);
-            if (!rocketAudio.isPlaying) {
+            if (!rocketAudio.isPlaying && state != State.Dying) {
                 rocketAudio.Play();
             } 
         } else {
@@ -70,6 +70,7 @@ public class Rocket : MonoBehaviour
                 break;
             default: 
                 state = State.Dying;
+                rocketAudio.Stop();
                 Invoke("PlayerDeath", 3f);
                 break;
         }
