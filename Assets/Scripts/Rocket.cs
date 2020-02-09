@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class Rocket : MonoBehaviour
 
     Rigidbody rigidbody;
     AudioSource rocketAudio;
+
+    enum State { Alive, Dying, Transcending }
+    State state = State.Alive;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,13 +59,21 @@ public class Rocket : MonoBehaviour
             case "Friendly":
                 Debug.Log("Meh");
                 break;
+            case "Finish":
+                Debug.Log("Mission complete");
+                Invoke("LoadNextScene", 1f);
+                break;
             case "Fuel": 
                 Debug.Log("BIG FUEL");
                 break;
             default: 
-                Debug.Log("DEAD");
+                SceneManager.LoadScene(0);
                 break;
         }
+    }
+
+    private void LoadNextScene() {
+        SceneManager.LoadScene(1);
     }
 
 }
