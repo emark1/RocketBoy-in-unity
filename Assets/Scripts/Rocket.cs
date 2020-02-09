@@ -25,8 +25,10 @@ public class Rocket : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Thrust();
-        Rotate();
+        if (state == State.Alive) {
+            Thrust();
+            Rotate();
+        }
     }
 
     private void Thrust() {
@@ -60,16 +62,21 @@ public class Rocket : MonoBehaviour
                 Debug.Log("Meh");
                 break;
             case "Finish":
-                Debug.Log("Mission complete");
+                state = State.Transcending;
                 Invoke("LoadNextScene", 1f);
                 break;
             case "Fuel": 
                 Debug.Log("BIG FUEL");
                 break;
             default: 
-                SceneManager.LoadScene(0);
+                state = State.Dying;
+                Invoke("PlayerDeath", 3f);
                 break;
         }
+    }
+
+    private void PlayerDeath() {
+        SceneManager.LoadScene(0);
     }
 
     private void LoadNextScene() {
