@@ -70,6 +70,7 @@ public class Rocket : MonoBehaviour
                 break;
             case "Finish":
                 state = State.Transcending;
+                rocketAudio.Stop();
                 rocketAudio.PlayOneShot(winSound);
                 Invoke("LoadNextScene", 1f);
                 break;
