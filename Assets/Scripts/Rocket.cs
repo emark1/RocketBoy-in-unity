@@ -12,6 +12,11 @@ public class Rocket : MonoBehaviour
     [SerializeField] AudioClip deathSound;
     [SerializeField] AudioClip winSound;
 
+    [SerializeField] ParticleSystem mainEngineParticles;
+    [SerializeField] ParticleSystem winParticles;
+    [SerializeField] ParticleSystem deathParticles;
+
+
     Rigidbody rigidbody;
     AudioSource rocketAudio;
 
@@ -38,11 +43,16 @@ public class Rocket : MonoBehaviour
         if (Input.GetKey(KeyCode.Space)) {
             float thrustSpeed = verticalThrust * Time.deltaTime;
             rigidbody.AddRelativeForce(Vector3.up * verticalThrust);
+            if (!mainEngineParticles.isPlaying && state != State.Dying) {
+                mainEngineParticles.Play();
+            }
             if (!rocketAudio.isPlaying && state != State.Dying) {
                 rocketAudio.PlayOneShot(mainEngine);
             } 
+            // mainEngineParticles.Play();
         } else {
             rocketAudio.Stop();
+            mainEngineParticles.Stop();
         }
     }
 
@@ -71,6 +81,8 @@ public class Rocket : MonoBehaviour
             case "Finish":
                 state = State.Transcending;
                 rocketAudio.Stop();
+                mainEngineParticles.Stop();
+                winParticles.Play();
                 rocketAudio.PlayOneShot(winSound);
                 Invoke("LoadNextScene", 1f);
                 break;
@@ -81,6 +93,8 @@ public class Rocket : MonoBehaviour
                 state = State.Dying;
                 rocketAudio.Stop();
                 rocketAudio.PlayOneShot(deathSound);
+                mainEngineParticles.Stop();
+                deathParticles.Play();
                 Invoke("PlayerDeath", 3f);
                 break;
         }
