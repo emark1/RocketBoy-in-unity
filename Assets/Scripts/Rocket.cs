@@ -6,11 +6,14 @@ using UnityEngine.SceneManagement;
 public class Rocket : MonoBehaviour
 {
 
+    //Movement
     [SerializeField] float rotateThrust = 10f;
     [SerializeField] float verticalThrust = 10f;
     [SerializeField] AudioClip mainEngine;
     [SerializeField] AudioClip deathSound;
     [SerializeField] AudioClip winSound;
+
+    //Particles
 
     [SerializeField] ParticleSystem mainEngineParticles;
     [SerializeField] ParticleSystem winParticles;
