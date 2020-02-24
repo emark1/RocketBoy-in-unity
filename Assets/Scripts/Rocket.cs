@@ -20,6 +20,7 @@ public class Rocket : MonoBehaviour
     [SerializeField] ParticleSystem deathParticles;
 
 
+    [SerialzieField] float levelLoadDelay = 2f;
     Rigidbody rigidbody;
     AudioSource rocketAudio;
 
@@ -87,7 +88,7 @@ public class Rocket : MonoBehaviour
                 mainEngineParticles.Stop();
                 winParticles.Play();
                 rocketAudio.PlayOneShot(winSound);
-                Invoke("LoadNextScene", 1f);
+                Invoke("LoadNextScene", levelLoadDelay);
                 break;
             case "Fuel": 
                 Debug.Log("BIG FUEL");
@@ -98,7 +99,7 @@ public class Rocket : MonoBehaviour
                 rocketAudio.PlayOneShot(deathSound);
                 mainEngineParticles.Stop();
                 deathParticles.Play();
-                Invoke("PlayerDeath", 3f);
+                Invoke("PlayerDeath", levelLoadDelay);
                 break;
         }
     }
