@@ -20,7 +20,7 @@ public class Rocket : MonoBehaviour
     [SerializeField] ParticleSystem deathParticles;
 
 
-    [SerialzieField] float levelLoadDelay = 2f;
+    [SerializeField] float levelLoadDelay = 2f;
     Rigidbody rigidbody;
     AudioSource rocketAudio;
 
