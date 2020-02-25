@@ -23,8 +23,9 @@ public class Rocket : MonoBehaviour
     [SerializeField] float levelLoadDelay = 2f;
     Rigidbody rigidbody;
     AudioSource rocketAudio;
+    bool collisionsAreEnabled = true;
 
-    enum State { Alive, Dying, Transcending }
+    enum State { Alive, Dying, Transcending, Immune }
     State state = State.Alive;
 
     // Start is called before the first frame update
@@ -40,6 +41,23 @@ public class Rocket : MonoBehaviour
         if (state == State.Alive) {
             Thrust();
             Rotate();
+        }
+
+        ToggleImmunity();
+    }
+
+    private void ToggleImmunity() {
+        if (Input.GetKeyDown(KeyCode.C)) {
+            if (collisionsAreEnabled == true) {
+                collisionsAreEnabled = false;
+                Debug.Log("Collisions off");
+                Debug.Log(collisionsAreEnabled);
+            } else if (collisionsAreEnabled == false) {
+                collisionsAreEnabled = true;
+                Debug.Log("Collisions are on");
+                Debug.Log(collisionsAreEnabled);
+            }
+            // collisionsAreEnabled = !collisionsAreEnabled;
         }
     }
 
@@ -74,7 +92,7 @@ public class Rocket : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision) {
-        if (state != State.Alive) {
+        if (state != State.Alive || collisionsAreEnabled != true) {
             return;
         }
 
