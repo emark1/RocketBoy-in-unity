@@ -20,6 +20,7 @@ public class Rocket : MonoBehaviour
     [SerializeField] ParticleSystem deathParticles;
 
 
+    //Variables
     [SerializeField] float levelLoadDelay = 2f;
     Rigidbody rigidbody;
     AudioSource rocketAudio;
@@ -42,8 +43,10 @@ public class Rocket : MonoBehaviour
             Thrust();
             Rotate();
         }
-
-        ToggleImmunity();
+        if (Debug.isDebugBuild) {
+            ToggleImmunity();
+        }
+        
     }
 
     private void ToggleImmunity() {
