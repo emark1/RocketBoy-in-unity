@@ -29,14 +29,12 @@ public class Rocket : MonoBehaviour
     enum State { Alive, Dying, Transcending, Immune }
     State state = State.Alive;
 
-    // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         rocketAudio = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (state == State.Alive) {
@@ -60,7 +58,6 @@ public class Rocket : MonoBehaviour
                 Debug.Log("Collisions are on");
                 Debug.Log(collisionsAreEnabled);
             }
-            // collisionsAreEnabled = !collisionsAreEnabled;
         }
     }
 
@@ -74,7 +71,6 @@ public class Rocket : MonoBehaviour
             if (!rocketAudio.isPlaying && state != State.Dying) {
                 rocketAudio.PlayOneShot(mainEngine);
             } 
-            // mainEngineParticles.Play();
         } else {
             rocketAudio.Stop();
             mainEngineParticles.Stop();
