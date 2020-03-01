@@ -95,7 +95,7 @@ public class Rocket : MonoBehaviour
 
         switch (collision.gameObject.tag) {
             case "Friendly":
-                Debug.Log("Meh");
+                Debug.Log("Friendly");
                 break;
             case "Finish":
                 state = State.Transcending;
