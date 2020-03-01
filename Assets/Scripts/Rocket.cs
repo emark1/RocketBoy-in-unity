@@ -51,11 +51,9 @@ public class Rocket : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C)) {
             if (collisionsAreEnabled == true) {
                 collisionsAreEnabled = false;
-                Debug.Log("Collisions off");
                 Debug.Log(collisionsAreEnabled);
             } else if (collisionsAreEnabled == false) {
                 collisionsAreEnabled = true;
-                Debug.Log("Collisions are on");
                 Debug.Log(collisionsAreEnabled);
             }
         }
